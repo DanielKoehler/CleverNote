@@ -10,6 +10,19 @@ var secrets = require('../config/secrets');
  * GET /login
  * Login page.
  */
+exports.evernote = function(req, res) {
+  var client = new Evernote.Client.new({
+    consumerKey: 'hhoggard',
+    consumerSecret: 'bdd96b4d3f05fbc8',
+    sandbox: [true] // Optional (default: true)
+  });
+  client.getRequestToken('http://178.62.122.146:3000/evernote/callback', function(error, oauthToken, oauthTokenSecret, results) {
+   
+ // store tokens in the session
+  // and then redirect to client.getAuthorizeUrl(oauthToken)
+});
+
+};
 
 exports.getLogin = function(req, res) {
   if (req.user) return res.redirect('/');
