@@ -2,12 +2,12 @@ from nltk.corpus import wordnet
 from docToPara import docToPara
 from paraToSentence import paraToSentence
 from isQueriable import isQueriable
-
+from analyseSentence import analyseSentence
 import sys
 import re
 
 sys.argv.append(1)
-sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time")
+sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
 sys.argv.append("Kings,Iain")
 
 # Doc ID | Doc | Tags
@@ -30,12 +30,15 @@ def main():
 	#for each paragraph
 	for p in pArray:
 		#break paragraph into sentences
-		sArray = paraToSentence(pArray)
+		sArray = paraToSentence(p)
 
 		#for each sentence
 		for s in sArray:
 			#see if the sentence is even reasonably questionable
 			if isQueriable(s):
+
+				#find nouns and add them to the keywords array
+				docKeys.append(searchKeywords(s))
 
 
 				#try and form a question and add it to the collection of flash cards
