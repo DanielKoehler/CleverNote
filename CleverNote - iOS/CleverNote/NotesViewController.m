@@ -9,6 +9,7 @@
 #import "Note.h"
 #import "NotesViewController.h"
 #import "NotesTableViewCell.h"
+#import "DetailedNoteViewController.h"
 
 @interface NotesViewController ()
 
@@ -69,6 +70,21 @@ cellForRowAtIndexPath:(NSIndexPath *)indexPath
     
     return cell;
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"DetailedView"])
+    {
+        // Get reference to the destination view controller
+        DetailedNoteViewController *vc = [segue destinationViewController];
+        
+        vc.note = ((NotesTableViewCell *) sender).note;
+        
+        // Pass any objects to the view controller here, like...
+        //        [vc setMyObjectHere:object];
+    }
 }
 
 

@@ -11,7 +11,7 @@
 
 #define kAPI_SCHEME @"http"
 #define kAPI_PORT 3000
-#define kAPI_HOST @"192.168.0.10"
+#define kAPI_HOST @"178.62.122.146"
 
 @implementation CleverNote
 
@@ -28,11 +28,13 @@
     return self;
 }
 
+
+
 -(void) loadNotes {
     
     // AFNEtworking Request
     
-    [self.urlBuilder setPath:[NSString stringWithFormat:@"/api/evernotey"]];
+    [self.urlBuilder setPath:[NSString stringWithFormat:@"/api/notes/:guid"]];
     NSURL *url = [self.urlBuilder URL];
     
     
@@ -48,8 +50,7 @@
         NSLog(@"Error: %@", error);
    
     }];
-    
-    
+
 }
 
 + (instancetype) singleton {

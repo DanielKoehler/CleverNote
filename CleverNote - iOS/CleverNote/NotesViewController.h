@@ -18,4 +18,3 @@
 @property (strong, nonatomic) NSArray *notes;
 
 @end
-

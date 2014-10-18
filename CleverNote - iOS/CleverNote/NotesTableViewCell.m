@@ -31,6 +31,7 @@
     
     [self.tagCollectionView setDelegate:self];
     [self.tagCollectionView setDataSource:self];
+    [self.tagCollectionView setUserInteractionEnabled:NO];
     
 //    [self.tagCollectionView registerClass:[TagCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
 
@@ -61,6 +62,7 @@
     return CGSizeMake([self.note.tags[indexPath.row] length] * 6.6, 30);
 
 }
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
