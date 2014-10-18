@@ -3,6 +3,7 @@ from docToPara import docToPara
 from paraToSentence import paraToSentence
 from isQueriable import isQueriable
 from analyseSentence import analyseSentence
+from searchKeywords import searchKeywords
 import sys
 import re
 import hashlib
@@ -20,7 +21,7 @@ def main():
 	docText = sys.argv[2]
 	docTags = sys.argv[3]
 	docFlash = []
-	docKeys = [] + list(docTags)
+	docKeys = docTags.split(",")
 
 	#break document into paragraphs
 	pArray = docToPara(docText)
@@ -40,14 +41,14 @@ def main():
 			if isQueriable(s):
 
 				#find nouns and add them to the keywords array
-				docKeys.append(searchKeywords(s))
+				docKeys += searchKeywords(s)
 
 
 				#try and form a question and add it to the collection of flash cards
 				docFlash.append(analyseSentence(s))
 	
 
-	
+	print docKeys
 
 if __name__ == "__main__":
 	main()
