@@ -29,7 +29,7 @@ exports.register = function(req, res, next) {
   User.findOne({ email: req.body.email }, function(err, existingUser) {
     if (existingUser) {
       req.flash('errors', { msg: 'Account with that email address already exists.' });
-      return res.redirect('/evernote/signup');
+      return res.redirect('/');
     }
     user.save(function(err) {
       if (err) return next(err);

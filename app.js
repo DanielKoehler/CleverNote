@@ -33,6 +33,7 @@ var contactController = require('./controllers/contact');
 var registerController = require('./controllers/register');
 var notebookController = require('./controllers/notebooks');
 var notesController = require('./controllers/notes');
+var noteController = require('./controllers/note');
 /**
  * API keys and Passport configuration.
  */
@@ -173,6 +174,7 @@ app.get('/evernote/register',registerController.index);
 app.post('/evernote/register',registerController.register);
 app.get('/notebooks',notebookController.index);
 app.get('/notes/:guid', notesController.index);
+app.get('/note/:guid', noteController.index);
 /**
  * API examples routes.
  */
