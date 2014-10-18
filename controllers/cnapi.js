@@ -4,11 +4,12 @@ var Notebook = require('../models/Notebook');
 
 exports.notebooks = function(req, res) {
   Notebook.find({user_email: req.user.email}, function(err,notebook) {
-     
+    
   if (err) return console.error(err);
     console.log(notebook);
     res.json(notebook);
-  });   
+   
+ });   
 };
 
 
