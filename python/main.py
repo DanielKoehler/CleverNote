@@ -30,26 +30,30 @@ def main():
 	#for each paragraph
 	for p in pArray:
 
-		if hashExists(docID)
+		if hashExists(docID):
+			pass
+			#retrieve from mongo
 
-		#store hash of paragraphs
-		addHash(docID,hashlib.md5(p))
+		else:
 
-		#break paragraph into sentences
-		sArray = paraToSentence(p)
+			#store hash of paragraphs
+			addHash(docID,hashlib.md5(p))
 
-		#for each sentence
-		for s in sArray:
-			#see if the sentence is even reasonably questionable
-			if isQueriable(s):
+			#break paragraph into sentences
+			sArray = paraToSentence(p)
 
-				#find nouns and add them to the keywords array
-				docKeys += searchKeywords(s)
+			#for each sentence
+			for s in sArray:
+				#see if the sentence is even reasonably questionable
+				if isQueriable(s):
+
+					#find nouns and add them to the keywords array
+					docKeys += searchKeywords(s)
 
 
-				#try and form a question and add it to the collection of flash cards
-				docFlash.append(analyseSentence(s))
-	
+					#try and form a question and add it to the collection of flash cards
+					docFlash.append(analyseSentence(s))
+			#add questions to DB
 
 	print docKeys
 
