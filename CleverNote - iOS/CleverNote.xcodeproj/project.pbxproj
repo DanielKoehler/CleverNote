@@ -27,6 +27,7 @@
 		4C84E22519F2D0310094AB15 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E21A19F2D0310094AB15 /* AFURLRequestSerialization.m */; };
 		4C84E22619F2D0310094AB15 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E21C19F2D0310094AB15 /* AFURLResponseSerialization.m */; };
 		4C84E22719F2D0310094AB15 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E21E19F2D0310094AB15 /* AFURLSessionManager.m */; };
+		4C84E22A19F2D9350094AB15 /* NotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		4C84E21C19F2D0310094AB15 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		4C84E21D19F2D0310094AB15 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		4C84E21E19F2D0310094AB15 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		4C84E22819F2D9350094AB15 /* NotesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewCell.h; sourceTree = "<group>"; };
+		4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 				4C3E66A719F2C29900D5A096 /* SignInViewController.h */,
 				4C3E66A819F2C29900D5A096 /* SignInViewController.m */,
 				4C3E668A19F2BE2A00D5A096 /* Main.storyboard */,
+				4C84E22819F2D9350094AB15 /* NotesTableViewCell.h */,
+				4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */,
 				4C2FECD319F2C5990083F94B /* CleverNote */,
 				4C3E668D19F2BE2A00D5A096 /* Images.xcassets */,
 				4C3E668F19F2BE2A00D5A096 /* LaunchScreen.xib */,
@@ -302,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C84E22419F2D0310094AB15 /* AFURLConnectionOperation.m in Sources */,
+				4C84E22A19F2D9350094AB15 /* NotesTableViewCell.m in Sources */,
 				4C3E66A919F2C29900D5A096 /* SignInViewController.m in Sources */,
 				4C3E668619F2BE2A00D5A096 /* CleverNote.xcdatamodeld in Sources */,
 				4C3E668319F2BE2A00D5A096 /* AppDelegate.m in Sources */,

@@ -32,7 +32,43 @@
     
     // AFNEtworking Request
     
+    [self.urlBuilder setPath:[NSString stringWithFormat:@"/api/evernotey"]];
+    NSURL *url = [self.urlBuilder URL];
     
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"JSON: %@", responseObject);
+        
+        // Parse all as notes.
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"Error: %@", error);
+   
+    }];
+    
+    
+}
+
++ (instancetype) singleton {
+    static id singletonInstance = nil;
+    if (!singletonInstance) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            singletonInstance = [[super allocWithZone:NULL] init];
+        });
+    }
+    return singletonInstance;
+}
+
++ (id) allocWithZone:(NSZone *)zone {
+    return [self singleton];
+}
+
+- (id) copyWithZone:(NSZone *)zone {
+    return self;
 }
 
 @end

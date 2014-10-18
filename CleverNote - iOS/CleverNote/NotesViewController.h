@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignInViewController.h"
 
-@interface NotesViewController : UIViewController
+@interface NotesViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
+@property (strong, nonatomic) UIViewController *signInViewController;
+
+@property (strong, nonatomic) IBOutlet UITableView *notesView;
+
+@property (strong, nonatomic) NSArray *notes;
 
 @end
 

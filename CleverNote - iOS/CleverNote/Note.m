@@ -21,7 +21,7 @@
     self.contentLength;	//i32
     
     self.created;	//Timestamp
-    self.self.updated ;	//Timestamp
+    self.updated ;	//Timestamp
     self.deleted;	//Timestamp
     self.active;	//bool
     self.updateSequenceNum;	//i32
@@ -42,6 +42,8 @@
     self.guid = @"1";
     self.title = @"Test Note";	//string
     self.content = @"Massive evernote file!!";	//string
+    self.updated = [NSDate dateWithTimeIntervalSince1970:1203849];
+    self.tags = @[@"Computer Science", @"Networking", @"Needs Revising"];
     
     return self;
     

@@ -22,11 +22,14 @@
 @property (nonatomic) BOOL active;	//bool
 @property (nonatomic) NSInteger *updateSequenceNum;	//i32
 @property (strong, nonatomic) NSString *notebookGuid;	//string
-@property (strong, nonatomic) NSMutableArray *tagGuids;	//list<Guid>
-@property (strong, nonatomic) NSMutableArray *resources;	//list<Resource>
+@property (strong, nonatomic) NSArray *tagGuids;	//list<Guid>
+@property (strong, nonatomic) NSArray *resources;	//list<Resource>
 //@property (strong, nonatomic) attributes	NoteAttributes
-@property (strong, nonatomic) NSMutableArray *tagNames;
+@property (strong, nonatomic) NSArray *tagNames;
+@property (strong, nonatomic) NSArray *tags;
 
 -(id) initWithJSONEncodedRepresentation:(NSDictionary *) json;
+
+-(id) testNote;
 
 @end
