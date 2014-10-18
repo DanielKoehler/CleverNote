@@ -30,7 +30,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-
+var registerController = require('./controllers/register');
 /**
  * API keys and Passport configuration.
  */
@@ -168,6 +168,7 @@ app.get('/evernote/state_token', function (req, res) {
         token: oauth.generateStateToken(req.session)
     });
 });
+app.get('/evernote/register',registerController.index);
 /**
  * API examples routes.
  */
