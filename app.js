@@ -138,7 +138,6 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 OAuth.initialize('b38gzoiWDSrHtXmB3lrFuaaDI2Q', 'laGxa8vgGQ2lIzSmF2qLrA4F_xw');
 
 app.get('/evernote',userController.evernote);
-
 app.get('/evernote/signin', OAuth.auth('evernote_sandbox', 'http://178.62.122.146:3000/evernote/redirect'));
 
 
@@ -169,6 +168,7 @@ app.get('/evernote/state_token', function (req, res) {
     });
 });
 app.get('/evernote/register',registerController.index);
+app.post('/evernote/register',registerController.register);
 /**
  * API examples routes.
  */
