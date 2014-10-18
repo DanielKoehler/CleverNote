@@ -11,7 +11,8 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
-
+var OAuth = require('oauthio');
+var Evernote = require('evernote').Evernote;
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')({ session: session });
 var flash = require('express-flash');
