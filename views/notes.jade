@@ -11,7 +11,7 @@ block content
     - each notebook in notebooks
       tr
         td 
-          a(href='/note/') #{notebook.name}
+          a(href='/note/' + notebook.guid) #{notebook.name}
         td
           #{notebook.serviceUpdated} 
 

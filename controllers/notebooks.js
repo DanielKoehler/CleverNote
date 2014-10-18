@@ -7,7 +7,7 @@ exports.index = function(req, res) {
   var client = new Evernote.Client({token: req.user.oauth_token});
   var noteStore = client.getNoteStore();
   notebooks = noteStore.listNotebooks(function(err, notebooks) {
-   res.render('notes', { 
+   res.render('notebooks', { 
      title: 'Notebooks',
      notebooks: notebooks,
 

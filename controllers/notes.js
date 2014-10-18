@@ -2,14 +2,18 @@ var Evernote = require('evernote').Evernote;
 var User = require('../models/User');
 
 exports.index = function(req, res) {
-  console.log(req.user.email);
-  console.log(req.user.oauth_token);
   var client = new Evernote.Client({token: req.user.oauth_token});
   var noteStore = client.getNoteStore();
-  notebooks = noteStore.listNotebooks(function(err, notebooks) {
+  var noteFilter = new Evernote.NoteFilter;
+  var guid = req.param.guid;
+  console.log(guid);
+  noteFilter.notebookGuid = guid; 
+ 
+ noteStore.findNotes(noteFilter, function(err, notes) {
+   console.log(notes);
    res.render('notes', { 
-     title: 'Notebooks',
-     notebooks: notebooks,
+     title: 'Notes',
+     notes: notes,
 
    });
  });
