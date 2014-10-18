@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Note.h"
 
-@interface NotesTableViewCell : UITableViewCell
+@interface NotesTableViewCell : UITableViewCell <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 
 @property (strong, nonatomic) IBOutlet UICollectionView *tagCollectionView;
-
 
 @property (strong, nonatomic) Note *note;
 

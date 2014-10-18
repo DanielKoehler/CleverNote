@@ -67,8 +67,6 @@ cellForRowAtIndexPath:(NSIndexPath *)indexPath
     
     [cell awakeFromNib];
     
-//    cell.backgroundColor = [UIColor blueColor];
-    
     return cell;
     
 }

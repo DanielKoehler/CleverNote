@@ -28,6 +28,7 @@
 		4C84E22619F2D0310094AB15 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E21C19F2D0310094AB15 /* AFURLResponseSerialization.m */; };
 		4C84E22719F2D0310094AB15 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E21E19F2D0310094AB15 /* AFURLSessionManager.m */; };
 		4C84E22A19F2D9350094AB15 /* NotesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */; };
+		4C84E22D19F2F6B20094AB15 /* TagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C84E22C19F2F6B20094AB15 /* TagCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		4C84E21E19F2D0310094AB15 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		4C84E22819F2D9350094AB15 /* NotesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesTableViewCell.h; sourceTree = "<group>"; };
 		4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesTableViewCell.m; sourceTree = "<group>"; };
+		4C84E22B19F2F6B20094AB15 /* TagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TagCollectionViewCell.h; path = ../TagCollectionViewCell.h; sourceTree = "<group>"; };
+		4C84E22C19F2F6B20094AB15 /* TagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TagCollectionViewCell.m; path = ../TagCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,8 @@
 				4C3E668A19F2BE2A00D5A096 /* Main.storyboard */,
 				4C84E22819F2D9350094AB15 /* NotesTableViewCell.h */,
 				4C84E22919F2D9350094AB15 /* NotesTableViewCell.m */,
+				4C84E22B19F2F6B20094AB15 /* TagCollectionViewCell.h */,
+				4C84E22C19F2F6B20094AB15 /* TagCollectionViewCell.m */,
 				4C2FECD319F2C5990083F94B /* CleverNote */,
 				4C3E668D19F2BE2A00D5A096 /* Images.xcassets */,
 				4C3E668F19F2BE2A00D5A096 /* LaunchScreen.xib */,
@@ -319,6 +324,7 @@
 				4C84E22719F2D0310094AB15 /* AFURLSessionManager.m in Sources */,
 				4C2FECD619F2C5C80083F94B /* CleverNote.m in Sources */,
 				4C2FECD919F2C7B50083F94B /* Note.m in Sources */,
+				4C84E22D19F2F6B20094AB15 /* TagCollectionViewCell.m in Sources */,
 				4C84E22119F2D0310094AB15 /* AFHTTPSessionManager.m in Sources */,
 				4C3E668019F2BE2A00D5A096 /* main.m in Sources */,
 				4C84E22219F2D0310094AB15 /* AFNetworkReachabilityManager.m in Sources */,
