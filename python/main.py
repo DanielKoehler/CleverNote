@@ -4,6 +4,7 @@ from paraToSentence import paraToSentence
 from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
+from addHash import addHash
 import sys
 import re
 import hashlib
@@ -26,12 +27,14 @@ def main():
 	#break document into paragraphs
 	pArray = docToPara(docText)
 
-	#store hash of paragraphs
-	#juydyjmdyhnydujhydrj
-	#not sure how to implement just yet
-
 	#for each paragraph
 	for p in pArray:
+
+		if hashExists(docID)
+
+		#store hash of paragraphs
+		addHash(docID,hashlib.md5(p))
+
 		#break paragraph into sentences
 		sArray = paraToSentence(p)
 
