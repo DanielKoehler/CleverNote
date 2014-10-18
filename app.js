@@ -34,6 +34,7 @@ var registerController = require('./controllers/register');
 var notebookController = require('./controllers/notebooks');
 var notesController = require('./controllers/notes');
 var noteController = require('./controllers/note');
+var cnapiController = require('./controllers/cnapi');
 /**
  * API keys and Passport configuration.
  */
@@ -175,6 +176,9 @@ app.post('/evernote/register',registerController.register);
 app.get('/notebooks',notebookController.index);
 app.get('/notes/:guid', notesController.index);
 app.get('/note/:guid', noteController.index);
+app.get('/api/notebooks/', cnapiController.notebooks);
+app.get('/api/notes/:guid',cnapiController.notes);
+app.get('/api/note/:guid',cnapiController.note);
 /**
  * API examples routes.
  */
