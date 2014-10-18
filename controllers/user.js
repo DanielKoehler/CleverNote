@@ -5,22 +5,14 @@ var nodemailer = require('nodemailer');
 var passport = require('passport');
 var User = require('../models/User');
 var secrets = require('../config/secrets');
-
+var OAuth = require('oauthio');
 /**
+
  * GET /login
  * Login page.
  */
 exports.evernote = function(req, res) {
-  var client = new Evernote.Client.new({
-    consumerKey: 'hhoggard',
-    consumerSecret: 'bdd96b4d3f05fbc8',
-    sandbox: [true] // Optional (default: true)
-  });
-  client.getRequestToken('http://178.62.122.146:3000/evernote/callback', function(error, oauthToken, oauthTokenSecret, results) {
-   
- // store tokens in the session
-  // and then redirect to client.getAuthorizeUrl(oauthToken)
-});
+OAuth.initialize('b38gzoiWDSrHtXmB3lrFuaaDI2Q', 'laGxa8vgGQ2lIzSmF2qLrA4F_xw');
 
 };
 

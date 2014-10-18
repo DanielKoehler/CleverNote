@@ -11,7 +11,8 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
-
+var oauth = require('oauthio');
+var Evernote = require('evernote').Evernote;
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')({ session: session });
 var flash = require('express-flash');
@@ -134,7 +135,38 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+oauth.initialize('b38gzoiWDSrHtXmB3lrFuaaDI2Q', 'laGxa8vgGQ2lIzSmF2qLrA4F_xw');
+
 app.get('/evernote',userController.evernote);
+
+app.get('/evernote/signin', oauth.auth('evernote_sandbox', 'http://178.62.122.146:3000/evernote/redirect'));
+
+
+app.get('/evernote/redirect', oauth.redirect(function(result, req, res) {
+console.log(result.oauth_token);
+var client = new Evernote.Client({token: result.oauth_token, sandbox: 'true'});
+console.log(client);
+var userStore = client.getUserStore();
+
+console.log(userStore);
+userStore.getUser(function(err, user) {
+console.log(user);
+});
+/*if (result instanceof Error) {
+        res.send(500, "error: " + result.message);
+   
+    }
+    result.me().done(function(me) {
+        console.log(me);
+        res.send(200, JSON.stringify(me));
+    });*/
+}));
+
+app.get('/evernote/state_token', function (req, res) {
+    res.send(200, {
+        token: oauth.generateStateToken(req.session)
+    });
+});
 /**
  * API examples routes.
  */
