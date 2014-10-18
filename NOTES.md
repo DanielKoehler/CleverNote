@@ -1,0 +1,20 @@
+CleverNote
+==========
+An Intelligent Note Taking System.
+
+Tech Crunch Hackathon  - UK 2014.
+
+VPS: root/oxmskgnxtfsj@178.62.122.146 
+
+##Group Public RSA Keys
+
+###Henry
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC1lRgIcJ96+LKqb1x2/Ah5jfmElt4qoz9NpM3ZCuFZOkz0lwODxw339RbnbV1aZvPpMyBzXoH28EjOQUXJGoFQ6UzOof5Vv4now0lFjaM3OJsrTBTtR83V7oA3i5cjj7lv4x8CnqjzPXeGzsATYCBdMRJkC5gfHK9qOCTowzGw00yR56tC6eaZxYbUvtDt9zrGaGpCs0tA7nf8Sv1HGNtZ5wwbpkLKhFywf8ZZ5ooCv62PGUONhRn41Z1+bgqUQxMYimkBPC+EWfLAey6quAeldukM/vNtsSAYp5/YdaPPyZt2UU2eHEX9nG59r04JReuhGeL9li7Ux7gS95esC4o7 hen@planet
+
+###Jonny
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSBwGJnrEUk576Guz/xrFluzguCpumzJRKpyTKzwRKMtOxVPbWFjtFJle/q+4hviRxpNTva3loZtakRktAHztJ+cChgVfQsbjAqCivxBD97Sbczqd2KAKnTzuR1aqL9yszHNzDEwnyCQqnJp6cf/b6XZb5mUA7HtsXOQyq/jOI7/UAAsr9jIyv5oXl4AWhCdE8Gqdg4p6EO0lYPNVZKmOQozYGR70vLFrn0bSSp9Z646UrdaDpQa3K9RNQlkPkxlaoiG+OhjfGw5iPZwvJdZS0dBmb8Jt9ur665kCtfTVxD7v3cylFHKgNB0kfwi9cFPTO16zpeCcMRKx0fomF/eRr stewartj1995@gmail.com
+
+
+http://178.62.122.146:3000/
