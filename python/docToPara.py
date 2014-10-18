@@ -1,4 +1,4 @@
 import re
 
-def docToPara():
-	return re.split('\n', docText)
+def docToPara(docText):
+	return re.split("\n", docText)
