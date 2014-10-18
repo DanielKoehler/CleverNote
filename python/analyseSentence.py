@@ -5,4 +5,7 @@ def getLexical(sentence):
 	text = nltk.Text(tokens)
 	tags = nltk.pos_tag(text)
 
-	print tags
+	return tags
+
+def analyseSentence(sentence):
+	pass
