@@ -5,6 +5,7 @@ from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 import sys
 import re
+import hashlib
 
 sys.argv.append(1)
 sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
@@ -25,6 +26,7 @@ def main():
 	pArray = docToPara(docText)
 
 	#store hash of paragraphs
+	#juydyjmdyhnydujhydrj
 	#not sure how to implement just yet
 
 	#for each paragraph
