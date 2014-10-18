@@ -4,7 +4,7 @@ from paraToSentence import paraToSentence
 from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
-from addHash import addHash
+import db
 import sys
 import re
 import hashlib
@@ -12,9 +12,6 @@ import hashlib
 sys.argv.append(1)
 sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
 sys.argv.append("Kings,Iain")
-
-# Doc ID | Doc | Tags
-# int    | Str | Str[]
 
 def main():
 	# Get system arguments
