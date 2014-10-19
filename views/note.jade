@@ -10,6 +10,13 @@ block content
     .col-md-4
        h2 Useful Links
        h3 Wikipedia
+       each wik in wiki
+         a(href='#{wik}') #{wik}
+         br 
+
+
+
+
        a(href='https://en.wikipedia.org/w/index.php?search='+title) #{title} on Wikipedia  
        h3 Youtube
        a(href='https://www.youtube.com/results?search_query='+title) #{title} on Youtube 

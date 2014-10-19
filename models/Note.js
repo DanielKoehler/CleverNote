@@ -8,6 +8,7 @@ var NoteSchema = new mongoose.Schema({
   user_email: String,
   content_text: String,
   content_html: String,
+  wiki_array: String,
 });
 
 var Note = mongoose.model('Note',NoteSchema);
