@@ -2,7 +2,6 @@ from nltk.corpus import wordnet
 from docToPara import docToPara
 from paraToSentence import paraToSentence
 from isQueriable import isQueriable
-from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
 from pymongo import MongoClient
 from createFlash import createFlash
