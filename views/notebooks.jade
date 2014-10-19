@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 My Notebooks
+  p.lead These are a list of your current notebooks, click on one to see your notes!
+  hr 
+  table.table.table-striped
+    tr
+        th Note
+      //  th Last Updated
+    - each notebook in notebooks
+      tr
+        td 
+          a(href='/notes/' + notebook.guid) #{notebook.name}
+      //  td
+        //  #{notebook.serviceUpdated}
+

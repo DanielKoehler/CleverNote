@@ -11,7 +11,8 @@ var logger = require('morgan');
 var errorHandler = require('errorhandler');
 var csrf = require('lusca').csrf();
 var methodOverride = require('method-override');
-
+var OAuth = require('oauthio');
+var Evernote = require('evernote').Evernote;
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')({ session: session });
 var flash = require('express-flash');
@@ -29,7 +30,11 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
-
+var registerController = require('./controllers/register');
+var notebookController = require('./controllers/notebooks');
+var notesController = require('./controllers/notes');
+var noteController = require('./controllers/note');
+var cnapiController = require('./controllers/cnapi');
 /**
  * API keys and Passport configuration.
  */
@@ -134,7 +139,46 @@ app.post('/account/profile', passportConf.isAuthenticated, userController.postUp
 app.post('/account/password', passportConf.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
+OAuth.initialize('b38gzoiWDSrHtXmB3lrFuaaDI2Q', 'laGxa8vgGQ2lIzSmF2qLrA4F_xw');
+
 app.get('/evernote',userController.evernote);
+app.get('/evernote/signin', OAuth.auth('evernote_sandbox', 'http://178.62.122.146:3000/evernote/redirect'));
+
+
+app.get('/evernote/redirect', OAuth.redirect(function(result, req, res) {
+var token = encodeURIComponent(result.oauth_token);
+res.redirect('/evernote/register/?token=' + token);
+
+/*console.log(client);
+var userStore = client.getUserStore();
+
+console.log(userStore);
+userStore.getUser(function(err, user) {
+console.log(user);
+});*/
+/*if (result instanceof Error) {
+        res.send(500, "error: " + result.message);
+   
+    }
+    result.me().done(function(me) {
+        console.log(me);
+        res.send(200, JSON.stringify(me));
+    });*/
+}));
+
+app.get('/evernote/state_token', function (req, res) {
+    res.send(200, {
+        token: oauth.generateStateToken(req.session)
+    });
+});
+app.get('/evernote/register',registerController.index);
+app.post('/evernote/register',registerController.register);
+app.get('/notebooks',notebookController.index);
+app.get('/notes/:guid', notesController.index);
+app.get('/note/:guid', noteController.index);
+app.get('/api/notebooks/', cnapiController.notebooks);
+app.get('/api/notes/:guid',cnapiController.notes);
+app.get('/api/note/:guid',cnapiController.note);
 /**
  * API examples routes.
  */

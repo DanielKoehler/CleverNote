@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 Notes: 
+  p.lead These are a list of your current notes!
+  hr 
+  table.table.table-striped
+    tr
+        th Note
+        th Last Updated
+    - each note in notes.notes
+      tr
+        td 
+          a(href='/note/' + note.guid) #{note.title}
+        td
+          #{note.serviceUpdated} 
+
