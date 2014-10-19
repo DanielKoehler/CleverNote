@@ -15,14 +15,14 @@ def main():
 	# Get system arguments
 	docText = sys.argv[1]
 	docKeys = sys.argv[2].split(',')
-	docFlash = []
+	docFlash = ""
 
 	#break document into paragraphs
 	pArray = docToPara(docText)
 
 	#for each paragraph
 	for p in pArray:
-		paraFlash = []
+		paraFlash = ""
 
 		#hash the paragraph
 		hashedPara = hashlib.md5(p).hexdigest()

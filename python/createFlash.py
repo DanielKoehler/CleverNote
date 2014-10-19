@@ -10,6 +10,7 @@ def createFlash(sentence):
 	words = ["is","isn't","was","wasn't","can","can't"]
 
 	questAns= re.split(' was | wasn\'t | is | isn\'t | can | can\'t | could | couldn\'t ',sentence)
+	question = ""
 
 	if "was" in sentence:
 		if questAns[0].lower() != "what":
@@ -100,8 +101,11 @@ def createFlash(sentence):
 			question = "What could " + subject + " do?"
 			answer = tmp
 
-			
-	retStr = question + "," + answer + ","
+	if type(answer) == type([]):
+		retStr = question + "," + answer[0] + ","
+	else:
+		retStr = question + "," + answer + ","
+	return retStr
 
 
 
