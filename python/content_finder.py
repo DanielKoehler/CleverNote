@@ -1,56 +1,96 @@
+
+import sys
 from bs4 import BeautifulSoup
 from htmldom import htmldom
 import requests
 import urllib
 import math
+import random
+from operator import itemgetter
+
 base_url = 'http://en.wikipedia.org'
 subject = ''
 
 def is_disambiguation_page(soup):
     return soup.find('a', {"title": "Category:Disambiguation pages"})
 
-def innerHTML(element):
-    return element.decode_contents(formatter="html")
-
 # Call this if the page is a disambiguation page.
 def find_correct_page(soup, tags):
     bodyContent = soup.find('div', {'id': 'bodyContent'})
     list_items = bodyContent.find_all('li')
-    vectors = dict()
+    pages = dict()
     for li in list_items:
         try:
+            # Get the paragraph text
             url = base_url + li.find('a')['href']
-            sub_soup = BeautifulSoup(urllib.urlopen(url).read()) 
-            content_div = sub_soup.find('div', {'id': 'mw-content-text'})
-            paragraphs = content_div.find_all('p')
 
-            vector = dict()
+            frequencies = dict()
+            # Initialise tag keys
             for tag in tags:
-                vector[tag] = 0
+                frequencies[tag] = 0
 
-            for paragraph in paragraphs:
-                p = innerHTML(paragraph)
-                for word in p:
-                    word = word.lower()
-                for tag in tags:
-                    vector[tag] += p.count(tag)
-
-            vectors[url] = vector
+            pages[url] = get_tag_frequency(url, tags)
         except:
             continue
-    best_match = ['', 0]
-    # Find the best match
-    for url, vector in vectors.iteritems():
-        total = 0
-        for tag, frequency in vector.iteritems():
-            total += frequency
-        if total > best_match[1]:
-            best_match[0] = url
-            best_match[1] = total
-    return best_match[0]
+
+    statistics = determine_relevance(pages, tags)
+    url = find_best_match(statistics)[0]
+    frequency = get_tag_frequency(url, tags)
+    return [url, frequency]
+
+def find_best_match(statistics):
+    # Find best match
+    best = ['', 0, 0]
+    for url, stats in statistics.iteritems():
+        if stats[0] > best[1]:
+            best[0] = url
+            best[1] = stats[0]
+            best[2] = stats[1]
+        elif (stats[0] == best[1]) and (stats[1]) > best[2]:
+            best[0] = url
+            best[1] = stats[0]
+            best[2] = stats[1]
+    return best
+
+# Dictionary where key is URL and value is dictionary.
+def determine_relevance(urls, tags):
+    statistics = dict()
+    # Define tag frequency and percentage of tags met
+    for url, frequencies in urls.iteritems():
+        total_frequency = 0
+        tags_met = 0
+
+        for tag, frequency in frequencies.iteritems():
+            if frequency > 0:
+                tags_met += 1
+            total_frequency += frequency
+
+        percentage = float(tags_met) / len(tags)
+        average_frequency = total_frequency / len(tags)
+
+        statistics[url] = [percentage, average_frequency]
+    return statistics
+
+def get_tag_frequency(url, tags):
+    soup = BeautifulSoup(urllib.urlopen(url).read()) 
+    content_div = soup.find('div', {'id': 'mw-content-text'})
+    paragraphs = content_div.find_all('p')
+    all_text = ''
+    frequencies = dict()
+    for paragraph in paragraphs:
+        p = innerHTML(paragraph)
+        for word in p:
+            word.lower()
+        all_text += p
+    for tag in tags:
+        frequencies[tag] = all_text.count(tag)
+    return frequencies
+
+def innerHTML(element):
+    return element.decode_contents(formatter="html")
 
 def find_correct_result(soup):
-    print "Finding correct result"
+    i = 0
 
 def is_search_result_page(soup):
     return False
@@ -62,22 +102,114 @@ def find_relevant_page(soup):
         div =  li.find('div', {'class': 'mw-search-result-heading'})
         print base_url + div.find('a')['href']
 
-# Scrape Wikipedia to find one main article and 3 related external articiles.
-def scrape(subject, tags):
-    url = base_url + "/w/index.php?search=" + subject
-    response = requests.get(url)
+def try_force_disambiguation(search_term, tags):
+    search_terms = search_term.split()
+    search_terms.append('disambiguation')
+    
+    for link in get_search_results(search_terms):
+        link = link.lower()
+        if search_term in link and 'disambiguation' in link:
+            return link
+        search_terms = search_term.split()
+        for term in search_term:
+            if term in link and 'disambiguation' in link:
+                return link
+    return False
+
+def get_total_tag_frequency(frequencies):
+    total = 0
+    for tag, frequency in frequencies.iteritems():
+        total += frequency
+    return total
+
+def find_page(search_term, tags):
+    url = base_url + "/w/index.php?search=" + search_term
 
     html = urllib.urlopen(url).read()
     soup = BeautifulSoup(html)
+    page = None
+
+    is_disambiguated = False
+    tag_frequency = 0
 
     if is_disambiguation_page(soup):
-        find_correct_page(soup, tags)
-    if is_search_result_page(soup):
-        find_correct_result(soup)
+        page = find_correct_page(soup, tags)
+    elif is_search_result_page(soup):
+        page = [find_correct_result(soup), 0]
+    else:
+        frequencies = get_tag_frequency(requests.get(url).url,tags)
+        #total = get_total_tag_frequency(frequencies)
+        page = [requests.get(url).url, frequencies]
 
-def main():
-    subject = 'python'
-    tags = ['recursion', 'fibonacci', 'base case', 'recursive call', 'stack', 'computer science']
+    return page
+
+# search_terms is an array of search terms
+def get_search_results(search_terms):
+    url = base_url + "/w/index.php?search=" + '+'.join(search_terms)
+    soup = BeautifulSoup(urllib.urlopen(url).read()) 
+
+    results = []
+
+    section = soup.fartind('div', {"class": "searchresults"}).parent
+    ul = section.find_next('ul', {'class' :'mw-search-results'}).find_all('li')
+    for li in ul:
+        div =  li.find('div', {'class': 'mw-search-result-heading'})
+        results.append(base_url + div.find('a')['href'])
+
+    return results
+    
+# Scrape Wikipedia to find one main article and 3 related external articiles.
+def scrape(subject, tags):
+    articles = dict()
+    subject_page = find_page(subject, tags)
+    articles[subject_page[0]] = subject_page[1]
+    for tag in tags:
+        tag_page = find_page(tag, tags)
+        articles[tag_page[0]] = tag_page[1]
+    return articles 
+
+def main(subject, tags, link_limit):
+    to_append = subject.split(' ')
+    for ta in to_append:
+        tags.append(ta)
     articles = scrape(subject, tags)
 
-main()
+    top_articles = []
+
+    # Ensure link_limit is equal to or less than number of articles
+    while link_limit > len(articles):
+        link_limit -= 1
+    
+    while len(top_articles) < link_limit:
+        statistics = determine_relevance(articles, tags)
+        best_url = find_best_match(statistics)[0]
+        for url in articles.keys():
+            if url == best_url:
+                del articles[url]
+        top_articles.append(best_url)
+
+    for article in top_articles:
+        print article
+
+    #while len(top_articles) < link_limit:
+        
+
+    #while len(top_articles) < link_limit:
+        #biggest = ['', 0, 0]
+        #index = 0
+        #for article in articles:
+            #in_top_articles = False
+            #for item in top_articles:
+                #if item[0] == article[0]:
+                    #in_top_articles = True
+            #if in_top_articles == False:
+                #if article[1] > biggest[1]:
+                    #biggest = article
+        #top_articles.append(biggest)
+
+limit = int(sys.argv[1])
+subject = str(sys.argv[2])
+tags = list(sys.argv[3::])
+main(subject, tags, limit)
+#main('python programming', ['recursion', 'loop', 'fibonacci', 'tree'], 5)
+

@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .page-header
+    h3 #{title}
+
+    .col-md-8
+      .div 
+        !{question}
+       p(style='color: #000000; background-color: black;') !{answer}
+    .col-md-4
+       h2 Useful Links
+       h3 Wikipedia
+       a(href='https://en.wikipedia.org/w/index.php?search='+title) #{title} on Wikipedia  
+       h3 Youtube
+       a(href='https://www.youtube.com/results?search_query='+title) #{title} on Youtube 
+       h3 Cousera
+       a(href='https://www.coursera.org/courses?orderby=upcoming&search='+title) #{title} on Coursera 
+       h3 Wolfram Alpha
+         Example
+       hr 
+       h3 Khan Academy
+         Example
+       hr
