@@ -7,6 +7,3 @@ def isQueriable(sentenceText):
 		if word in sentenceText.split(" "):
 			queriable = True
 	return queriable
-
-
-isQueriable("test")
