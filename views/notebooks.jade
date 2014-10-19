@@ -7,11 +7,11 @@ block content
   table.table.table-striped
     tr
         th Note
-        th Last Updated
+      //  th Last Updated
     - each notebook in notebooks
       tr
         td 
           a(href='/notes/' + notebook.guid) #{notebook.name}
-        td
-          #{notebook.serviceUpdated} 
+      //  td
+        //  #{notebook.serviceUpdated}
 

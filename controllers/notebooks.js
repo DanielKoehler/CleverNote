@@ -12,7 +12,7 @@ for (var i in notebooks) {
               name: notebooks[i].name,
               user_email: req.user.email,
               guid: notebooks[i].guid
-
+            
               });
              notebook.save(function(err){
             if (err) {
@@ -26,5 +26,10 @@ for (var i in notebooks) {
    });
 });
  };
+
+
+
+	
+
 
 
