@@ -66,6 +66,7 @@ def main():
 		for flash in paraFlash:
 			db.addFlash(hashedPara, flash)
 		docFlash += paraFlash
+	return docFlash
 
 
 if __name__ == "__main__":
