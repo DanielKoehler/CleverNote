@@ -34,7 +34,7 @@ def getXtra(hashStr):
 
 def hashExists(hashStr):
 	hpTable = db['hasheet']
-	r = hpTable.findOne({"hashStr": hashStr})
+	r = hpTable.find_one({"hashStr": hashStr})
 	if r == None:
 		return False
 	else:

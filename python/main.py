@@ -5,6 +5,7 @@ from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
 from pymongo import MongoClient
+from createFlash import createFlash
 import db
 import sys
 import re
@@ -22,23 +23,30 @@ def main():
 	# Get system arguments
 	docID = sys.argv[1]
 	docText = sys.argv[2]
-	docTags = sys.argv[3]
+	docKeys = sys.argv[3].split(',')
 	docFlash = []
-	docKeys = docTags.split(",")
 
 	#break document into paragraphs
 	pArray = docToPara(docText)
 
 	#for each paragraph
-
 	for p in pArray:
-		if db.hashExists(hashlib.md5(p)):
-			pass
+		paraFlash = []
+
+		#hash the paragraph
+		hashedPara = hashlib.md5(p).hexdigest()
+
+		#if we've scanned the paragraph before
+		if db.hashExists(hashedPara):
+
+			#retreive saved data for paragraph
+			paraFlash = db.getFlash(hashedPara)
+			paraExt = db.getXtra(hashedPara)
 
 		else:
 
 			#store hash of paragraphs
-			#addHash(docID,hashlib.md5(p))
+			db.addHash(hashedPara)
 
 			#break paragraph into sentences
 			sArray = paraToSentence(p)
@@ -53,11 +61,12 @@ def main():
 
 
 					#try and form a question and add it to the collection of flash cards
-					docFlash.append(analyseSentence(s))
+					paraFlash.append(createFlash(s))
 			#add questions to DB
+		for flash in paraFlash:
+			db.addFlash(hashedPara, flash)
+		docFlash += paraFlash
 
-
-	print docKeys
 
 if __name__ == "__main__":
 	main()

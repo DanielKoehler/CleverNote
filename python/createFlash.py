@@ -1,4 +1,4 @@
 def createFlash(sentence):
-	return
+	return "test"
 
 print createFlash("")
