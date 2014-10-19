@@ -101,8 +101,7 @@ def createFlash(sentence):
 			answer = tmp
 
 			
-	
-	return {"question":question, "answer":answer}
+	retStr = question + "," + answer + ","
 
 
 

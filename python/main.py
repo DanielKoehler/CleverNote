@@ -52,7 +52,7 @@ def main():
 
 
 					#try and form a question and add it to the collection of flash cards
-					paraFlash.append(createFlash(s))
+					paraFlash += createFlash(s)
 			#add questions to DB
 		for flash in paraFlash:
 			db.addFlash(hashedPara, flash)
