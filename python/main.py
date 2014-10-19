@@ -4,10 +4,7 @@ from paraToSentence import paraToSentence
 from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
-<<<<<<< HEAD
 from pymongo import MongoClient
-=======
->>>>>>> 33eb2582530880fd8534f048843bcbfd05385bca
 import db
 import sys
 import re
@@ -17,13 +14,10 @@ sys.argv.append(1)
 sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
 sys.argv.append("Kings,Iain")
 
-<<<<<<< HEAD
 
 # Doc ID | Doc | Tags
 # int    | Str | Str[]
 
-=======
->>>>>>> 33eb2582530880fd8534f048843bcbfd05385bca
 def main():
 	# Get system arguments
 	docID = sys.argv[1]
@@ -38,7 +32,7 @@ def main():
 	#for each paragraph
 
 	for p in pArray:
-		if db.hashExists(p):
+		if db.hashExists(hashlib.md5(p)):
 			pass
 
 		else:
