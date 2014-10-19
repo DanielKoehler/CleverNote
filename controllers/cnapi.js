@@ -14,7 +14,8 @@ exports.notebooks = function(req, res) {
 
 
 exports.note = function(req, res) {
-  res.render('home', {
+   res.render('home', {
+
     title: 'Home'
   });
 };
