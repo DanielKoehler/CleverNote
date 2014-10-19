@@ -4,7 +4,8 @@ from paraToSentence import paraToSentence
 from isQueriable import isQueriable
 from analyseSentence import analyseSentence
 from searchKeywords import searchKeywords
-from addHash import addHash
+from pymongo import MongoClient
+import db
 import sys
 import re
 import hashlib
@@ -12,6 +13,7 @@ import hashlib
 sys.argv.append(1)
 sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
 sys.argv.append("Kings,Iain")
+
 
 # Doc ID | Doc | Tags
 # int    | Str | Str[]
@@ -28,16 +30,15 @@ def main():
 	pArray = docToPara(docText)
 
 	#for each paragraph
-	for p in pArray:
 
-		if hashExists(docID):
+	for p in pArray:
+		if db.hashExists(p):
 			pass
-			#retrieve from mongo
 
 		else:
 
 			#store hash of paragraphs
-			addHash(docID,hashlib.md5(p))
+			#addHash(docID,hashlib.md5(p))
 
 			#break paragraph into sentences
 			sArray = paraToSentence(p)
@@ -54,6 +55,7 @@ def main():
 					#try and form a question and add it to the collection of flash cards
 					docFlash.append(analyseSentence(s))
 			#add questions to DB
+
 
 	print docKeys
 
