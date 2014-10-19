@@ -106,20 +106,20 @@ def createFlash(sentence):
 
 
 
-createFlash("Birds could fly")
-createFlash("24-Hours at TechCrunch could kill you")
+# createFlash("Birds could fly")
+# createFlash("24-Hours at TechCrunch could kill you")
 
-createFlash("Birds could fly")
-createFlash("24-Hours at TechCrunch could kill you")
+# createFlash("Birds could fly")
+# createFlash("24-Hours at TechCrunch could kill you")
 
-createFlash("The Sky is blue")
-createFlash("Helium is the first element")
-createFlash("Pete is a dick")
-createFlash("There is an elephant in the room")
+# createFlash("The Sky is blue")
+# createFlash("Helium is the first element")
+# createFlash("Pete is a dick")
+# createFlash("There is an elephant in the room")
 
-createFlash("Iain was a great king")
-createFlash("There was a war in the year 2003")
-createFlash("Pete Davison was born on the 1st Oct")
-createFlash("The 2nd World War was in 1939")
-createFlash("That really was not fun")
-createFlash("I was evil")
+# createFlash("Iain was a great king")
+# createFlash("There was a war in the year 2003")
+# createFlash("Pete Davison was born on the 1st Oct")
+# createFlash("The 2nd World War was in 1939")
+# createFlash("That really was not fun")
+# createFlash("I was evil")

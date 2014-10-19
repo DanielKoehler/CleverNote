@@ -11,19 +11,11 @@ import sys
 import re
 import hashlib
 
-sys.argv.append(1)
-sys.argv.append("King Iain ruled from 1808-1809 \n it's a terrible time \n there is little hope")
-sys.argv.append("Kings,Iain")
-
-
-# Doc ID | Doc | Tags
-# int    | Str | Str[]
 
 def main():
 	# Get system arguments
-	docID = sys.argv[1]
-	docText = sys.argv[2]
-	docKeys = sys.argv[3].split(',')
+	docText = sys.argv[1]
+	docKeys = sys.argv[2].split(',')
 	docFlash = []
 
 	#break document into paragraphs
