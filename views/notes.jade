@@ -7,11 +7,11 @@ block content
   table.table.table-striped
     tr
         th Note
-        th Last Updated
+        th Flash Cards
     - each note in notes.notes
       tr
         td 
           a(href='/note/' + note.guid) #{note.title}
         td
-          #{note.serviceUpdated} 
+          a(href='/flash/' + note.guid) Click Here
 
