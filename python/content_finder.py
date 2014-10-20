@@ -7,11 +7,27 @@ import math
 import random
 from operator import itemgetter
 
+# ISSUES
+# - quite slow
+#   * research into techniques to improve text analysis
+# - filter out obviously unrelated pages?
+# - not all notes have a useful set of tags
+#   * if small no. of tags then apply text analysis to define top relevant
+#     keywords that accurately describe the nature of the note
+
 base_url = 'http://en.wikipedia.org'
 subject = ''
 
 def is_disambiguation_page(soup):
     return soup.find('a', {"title": "Category:Disambiguation pages"})
+
+def is_search_result_page(soup):
+    content = soup.find('div', {'id': 'bodyContent'})
+    divs = content.find_all('div')
+    for div in divs:
+        if div.has_attr('class'):
+            return div.get('class') == 'searchresults'
+    return False
 
 # Call this if the page is a disambiguation page.
 def find_correct_page(soup, tags):
@@ -42,7 +58,6 @@ def find_best_match(statistics):
     best = ['', 0, 0]
     for url, stats in statistics.iteritems():
         if stats[0] > best[1]:
-            best[0] = url
             best[1] = stats[0]
             best[2] = stats[1]
         elif (stats[0] == best[1]) and (stats[1]) > best[2]:
@@ -88,12 +103,11 @@ def get_tag_frequency(url, tags):
 def innerHTML(element):
     return element.decode_contents(formatter="html")
 
-def find_correct_result(soup):
-    i = 0
-
-def is_search_result_page(soup):
-    return False
-
+def find_correct_result(search_term):
+    results = get_search_results(search_term)
+    for i in range(3):
+        result = results[i]
+         
 def find_relevant_page(soup):
     section = soup.find('div', {"class": "searchresults"}).parent
     ul = section.find_next('ul', {'class' :'mw-search-results'}).find_all('li')
@@ -104,7 +118,6 @@ def find_relevant_page(soup):
 def try_force_disambiguation(search_term, tags):
     search_terms = search_term.split()
     search_terms.append('disambiguation')
-    
     for link in get_search_results(search_terms):
         link = link.lower()
         if search_term in link and 'disambiguation' in link:
@@ -134,10 +147,10 @@ def find_page(search_term, tags):
     if is_disambiguation_page(soup):
         page = find_correct_page(soup, tags)
     elif is_search_result_page(soup):
-        page = [find_correct_result(soup), 0]
+        print "%s is likely a search result page." % url
+        page = [find_correct_result(search_term), 0]
     else:
         frequencies = get_tag_frequency(requests.get(url).url,tags)
-        #total = get_total_tag_frequency(frequencies)
         page = [requests.get(url).url, frequencies]
 
     return page
@@ -149,12 +162,11 @@ def get_search_results(search_terms):
 
     results = []
 
-    section = soup.fartind('div', {"class": "searchresults"}).parent
+    section = soup.find('div', {"class": "searchresults"}).parent
     ul = section.find_next('ul', {'class' :'mw-search-results'}).find_all('li')
     for li in ul:
         div =  li.find('div', {'class': 'mw-search-result-heading'})
         results.append(base_url + div.find('a')['href'])
-
     return results
     
 # Scrape Wikipedia to find one main article and 3 related external articiles.
@@ -163,8 +175,11 @@ def scrape(subject, tags):
     subject_page = find_page(subject, tags)
     articles[subject_page[0]] = subject_page[1]
     for tag in tags:
-        tag_page = find_page(tag, tags)
-        articles[tag_page[0]] = tag_page[1]
+        try:
+            tag_page = find_page(tag, tags)
+            articles[tag_page[0]] = tag_page[1]
+        except:
+            continue
     return articles 
 
 def main(subject, tags, link_limit):
@@ -179,6 +194,7 @@ def main(subject, tags, link_limit):
     while link_limit > len(articles):
         link_limit -= 1
     
+    # Return the most relevant wikipedia articles
     while len(top_articles) < link_limit:
         statistics = determine_relevance(articles, tags)
         best_url = find_best_match(statistics)[0]
@@ -190,24 +206,8 @@ def main(subject, tags, link_limit):
     for article in top_articles:
         print article
 
-    #while len(top_articles) < link_limit:
-        
-
-    #while len(top_articles) < link_limit:
-        #biggest = ['', 0, 0]
-        #index = 0
-        #for article in articles:
-            #in_top_articles = False
-            #for item in top_articles:
-                #if item[0] == article[0]:
-                    #in_top_articles = True
-            #if in_top_articles == False:
-                #if article[1] > biggest[1]:
-                    #biggest = article
-        #top_articles.append(biggest)
-
-limit = int(sys.argv[1])
-subject = str(sys.argv[2])
-tags = list(sys.argv[3::])
+if __name__ == "__main__":
+    limit = int(sys.argv[1])
+    subject = str(sys.argv[2])
+    tags = list(sys.argv[3::])
 main(subject, tags, limit)
-#main('python programming', ['recursion', 'loop', 'fibonacci', 'tree'], 5)
