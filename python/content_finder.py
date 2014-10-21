@@ -14,6 +14,7 @@ from operator import itemgetter
 # - not all notes have a useful set of tags
 #   * if small no. of tags then apply text analysis to define top relevant
 #     keywords that accurately describe the nature of the note
+#   * AlchemyAPI
 
 base_url = 'http://en.wikipedia.org'
 subject = ''
@@ -26,7 +27,8 @@ def is_search_result_page(soup):
     divs = content.find_all('div')
     for div in divs:
         if div.has_attr('class'):
-            return div.get('class') == 'searchresults'
+            if div.get('class') == 'searchresults':
+                return True
     return False
 
 # Call this if the page is a disambiguation page.
@@ -53,8 +55,8 @@ def find_correct_page(soup, tags):
     frequency = get_tag_frequency(url, tags)
     return [url, frequency]
 
+# Find best match
 def find_best_match(statistics):
-    # Find best match
     best = ['', 0, 0]
     for url, stats in statistics.iteritems():
         if stats[0] > best[1]:
